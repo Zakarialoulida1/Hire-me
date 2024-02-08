@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('position');
             $table->string('company');
-            $table->year('start_year');
-            $table->year('end_year')->nullable();
+            $table->date('start_year');
+            $table->date('end_year')->nullable();
             $table->timestamps();
             $table->foreignId('cv_id')->references('id')->on('cvs')->onDelete('cascade');
 

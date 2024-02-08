@@ -1,6 +1,10 @@
 <?php
-
+use App\Http\Controllers\CompetenceController;
+use App\Http\Controllers\ExperienceController;
+use App\Http\Controllers\Formcontroller;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\PDFController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -30,6 +35,23 @@ Route::middleware('auth')->group(function () {
     Route::get('/cv', [\App\Http\Controllers\Formcontroller::class, 'index'])->name('cv_form');
     Route::post('/store', [\App\Http\Controllers\Formcontroller::class, 'store'])->name('cv.store');
     Route::get('/cv/cursus', [\App\Http\Controllers\Formcontroller::class, 'getUserCursus'])->name('getUserCursus');
+    Route::delete('/cursus/{id}', [Formcontroller::class, 'destroy'])->name('cursus.destroy');
+
+    
+    Route::get('/user/experiences', [ExperienceController::class, 'getUserExperience'])->name('getUserExperience');
+    Route::post('/experience', [ExperienceController::class, 'store'])->name('experience.store');
+    Route::delete('/experience/{id}', [ExperienceController::class, 'destroy'])->name('experience.destroy');
+
+    
+
+Route::post('/language', [LanguageController::class, 'storeLanguage'])->name('language.store');
+Route::get('/user/language', [LanguageController::class, 'getUserLanguage'])->name('getUserLanguage');
+Route::delete('/language/{id}', [LanguageController::class, 'deleteLanguage'])->name('language.destroy');
+
+Route::post('/competence', [CompetenceController::class, 'store'])->name('competence.store');
+Route::get('/user/competence', [CompetenceController::class, 'getUserCompetence'])->name('getUserCompetence');
+Route::delete('/competence/{id}', [CompetenceController::class, 'destroy'])->name('competence.destroy');
+Route::get('/generate-pdf', [PDFController::class, 'generatePDF'])->name('generate.pdf');
 
 });
 

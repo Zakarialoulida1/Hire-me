@@ -50,5 +50,16 @@ class Formcontroller extends Controller
     return response()->json($cursus);
 
 }
+public function destroy($id)
+{
+   
+    // Find the cursus entry by its ID
+    $cursus = Cursus::findOrFail($id);
 
+    // Delete the cursus entry
+    $cursus->delete();
+
+    // Optionally, you can return a response indicating success
+    return response()->json(['message' => 'Cursus deleted successfully'], 200);
+}
 }
