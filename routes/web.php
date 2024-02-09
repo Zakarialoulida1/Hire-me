@@ -32,7 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/cv', [\App\Http\Controllers\Formcontroller::class, 'index'])->name('cv_form');
+    Route::get('/cvform', [\App\Http\Controllers\Formcontroller::class, 'index'])->name('formCv');
     Route::post('/store', [\App\Http\Controllers\Formcontroller::class, 'store'])->name('cv.store');
     Route::get('/cv/cursus', [\App\Http\Controllers\Formcontroller::class, 'getUserCursus'])->name('getUserCursus');
     Route::delete('/cursus/{id}', [Formcontroller::class, 'destroy'])->name('cursus.destroy');
@@ -51,7 +51,10 @@ Route::delete('/language/{id}', [LanguageController::class, 'deleteLanguage'])->
 Route::post('/competence', [CompetenceController::class, 'store'])->name('competence.store');
 Route::get('/user/competence', [CompetenceController::class, 'getUserCompetence'])->name('getUserCompetence');
 Route::delete('/competence/{id}', [CompetenceController::class, 'destroy'])->name('competence.destroy');
+
+
 Route::get('/generate-pdf', [PDFController::class, 'generatePDF'])->name('generate.pdf');
+Route::get('/cv', [PDFController::class, 'index'])->name('cv');
 
 });
 

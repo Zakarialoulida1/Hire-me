@@ -31,7 +31,7 @@
         @endif
 
         <a href="{{ route('generate.pdf') }}">Download PDF</a>
-
+        <a href="{{ route('cv') }}">view PDF</a>
         <div id="cursusList" class="m-4 w-full"></div>
         <!-- Page Content -->
         <main>
@@ -152,7 +152,9 @@
 <div id="competenceList" class="m-4 w-full"></div>
 
     <form id="competenceForm"
-        class="p-6 border rounded-md transition duration-300 ease-in-out border-gray-300 hover:border-blue-500">
+
+    class="m-4 p-6 border bg-gray-300 rounded-md transition duration-300 ease-in-out border-gray-300 hover:border-blue-500">
+      
         @csrf
         <div>
             <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Competence
@@ -162,7 +164,7 @@
                 placeholder="Competence Name" required>
         </div>
         <button type="button" id="submitCompetenceBtn"
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+            class="text-white m-2 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
     </form>
 
 
