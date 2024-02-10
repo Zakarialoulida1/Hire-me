@@ -32,10 +32,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
+  
+  
+  Route::post('/company/store', [\App\Http\Controllers\Companycontroller::class, 'store'])->name('store.company');
+ 
     Route::get('/company', [\App\Http\Controllers\Companycontroller::class, 'index'])->name('formcompany');
-
-
+ 
+ 
     Route::get('/cvform', [\App\Http\Controllers\Formcontroller::class, 'index'])->name('formCv');
     Route::post('/store', [\App\Http\Controllers\Formcontroller::class, 'store'])->name('cv.store');
     Route::get('/cv/cursus', [\App\Http\Controllers\Formcontroller::class, 'getUserCursus'])->name('getUserCursus');
