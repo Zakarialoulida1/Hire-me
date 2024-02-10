@@ -28,10 +28,30 @@ class PDFController extends Controller
     public function generatePDF()
     {
        
-        $html = view('cv.cv_form')->render();
-        $html="<h1>ghghed</h1>";
+        // $html = view('cv.cv')->render();
+       
+        // // Generate the PDF
+        // $pdf = PDF::loadHTML($html);
+        // return $pdf->download('cv.pdf');
+
+        $cv = Cv::where('user_id', Auth::id())->firstOrFail();
+        $user = Auth::user();
+        $cursuses = $cv->cursuses;
+        $languages = $cv->languages;
+        $experiences = $cv->experiences;
+        $competences = $cv->competences;
+    
+        // Pass data to the PDF view
+        $data = compact('user', 'cursuses', 'languages', 'experiences', 'competences');
+    
+    
+    
+        // Extract only the content of the container div
+     
         // Generate the PDF
-        $pdf = PDF::loadHTML($html);
+        $pdf = PDF::loadView('cv.cv', $data);
+    
+        // Download the PDF
         return $pdf->download('sample.pdf');
     }
 }

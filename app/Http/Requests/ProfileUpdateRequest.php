@@ -24,7 +24,7 @@ class ProfileUpdateRequest extends FormRequest
             'About'=>'required',
             'industrie'=>'required',
             'phone'=>'required',
-          
+            'image' => ['required', 'image', 'mimes:png,svg,jpg,jpeg']
         ];
     }
 }

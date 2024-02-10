@@ -32,17 +32,21 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/company', [\App\Http\Controllers\Companycontroller::class, 'index'])->name('formcompany');
+
+
     Route::get('/cvform', [\App\Http\Controllers\Formcontroller::class, 'index'])->name('formCv');
     Route::post('/store', [\App\Http\Controllers\Formcontroller::class, 'store'])->name('cv.store');
     Route::get('/cv/cursus', [\App\Http\Controllers\Formcontroller::class, 'getUserCursus'])->name('getUserCursus');
     Route::delete('/cursus/{id}', [Formcontroller::class, 'destroy'])->name('cursus.destroy');
 
-    
+
     Route::get('/user/experiences', [ExperienceController::class, 'getUserExperience'])->name('getUserExperience');
     Route::post('/experience', [ExperienceController::class, 'store'])->name('experience.store');
     Route::delete('/experience/{id}', [ExperienceController::class, 'destroy'])->name('experience.destroy');
 
-    
+
 
 Route::post('/language', [LanguageController::class, 'storeLanguage'])->name('language.store');
 Route::get('/user/language', [LanguageController::class, 'getUserLanguage'])->name('getUserLanguage');

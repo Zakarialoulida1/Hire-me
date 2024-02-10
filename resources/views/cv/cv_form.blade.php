@@ -30,7 +30,7 @@
             </header>
         @endif
 
-        <a href="{{ route('generate.pdf') }}">Download PDF</a>
+        
         <a href="{{ route('cv') }}">view PDF</a>
         <div id="cursusList" class="m-4 w-full"></div>
         <!-- Page Content -->
