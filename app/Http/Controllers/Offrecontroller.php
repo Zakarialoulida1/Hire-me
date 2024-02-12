@@ -38,19 +38,17 @@ class Offrecontroller extends Controller
         return redirect()->back()->with('success', 'Job offer created successfully!');
     }
 
-    public function show(){
-        $user= Auth::user();
-        $entreprise=$user->entreprise;
-        if($entreprise){
-            $offres=$entreprise->offres;
 
-                return view('offre.index', compact('offres'));
-            }
+    public function show() {
+        $userRole = Auth::user()->role;
 
-            // Handle case where user does not have an associated entreprise
-            return redirect()->back()->with('error', 'You do not have a company associated with your account.');
+        if ($userRole === 'entreprise') {
+            $offres = Auth::user()->entreprise->offres;
+        } else {
+            $offres = Offre::all();
+        }
 
-
+        return view('offre.index', compact('offres'));
     }
 
 public function postuler(Request $request, $offreId)

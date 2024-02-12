@@ -34,11 +34,13 @@
                     </div>
                     
                     <hr class="mb-12">
+                @if (!(Auth()->user()->entreprise))
+                    
                 
                     <div class="m-4 absolute bottom-0 right-0">
                         <button class="border rounded bg-green-400 p-2 postuler-btn" data-offre-id="{{ $offre->id }}">Postuler</button>
                     </div>
-                    
+                   @endif 
                     
                     <a id="readmore" class="underline" role="button">
                      Read more
@@ -68,8 +70,13 @@ function postuler(offreId) {
             _token: '{{ csrf_token() }}'
         },
         success: function(response) {
-            // Gérer la réponse de la demande Ajax si nécessaire
-            console.log(response);
+            Swal.fire({
+                            icon: 'success',
+                            title: 'Postulée!',
+                            text: response.message,
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
         },
         error: function(xhr, status, error) {
             // Gérer les erreurs de la demande Ajax si nécessaire
