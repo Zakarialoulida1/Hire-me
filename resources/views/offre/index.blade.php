@@ -1,21 +1,21 @@
 
     <x-app-layout>
         <h1 class="text-center text-3xl">Offres</h1>
-    
+
         <div class="ml-80 grid grid-cols-1">
             @foreach ($offres as $offre)
-            
+
                 <div class="border m-4 p-3 rounded w-[600px] bg-white relative">
                     <h1 class="font-bold text-xl mb-2">{{ $offre->titre }}</h1>
-    
+
                     <p class="text-gray-700 mb-4">
                         {{ Str::limit($offre->description, 100) }}
                     </p>
-    
+
                     <div class="m-1"><span class=" font-semibold text-bold">Skills : </span>
                         <p>{{ $offre->compétences_requises }}</p>
                     </div>
-    
+
                     <div class="flex items-center mb-4">
                         <span class="mr-2 flex-shrink-0">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"
@@ -25,29 +25,29 @@
                             </svg>
                         </span>
                         <div>
-    
+
                             <p class="text-gray-700 ml-2">{{ $offre->emplacement }}</p>
                         </div>
                     </div>
                     <div class="m-1"><span class="font-semibold text-bold">Contract type : </span>
                         <p>{{ $offre->type_contrat }}</p>
                     </div>
-                    
+
                     <hr class="mb-12">
                 @if (!(Auth()->user()->entreprise))
-                    
-                
+
+
                     <div class="m-4 absolute bottom-0 right-0">
                         <button class="border rounded bg-green-400 p-2 postuler-btn" data-offre-id="{{ $offre->id }}">Postuler</button>
                     </div>
-                   @endif 
-                    
+                   @endif
+
                     <a id="readmore" class="underline" role="button">
                      Read more
                     </a>
                 </div>
             @endforeach
-    
+
         </div>
         <script>
             // Écoute les clics sur les boutons "Postuler"
@@ -58,11 +58,10 @@ document.querySelectorAll('.postuler-btn').forEach(button => {
     });
 });
 
-// Fonction pour envoyer une demande Ajax de postulation
 function postuler(offreId) {
     // You can use either route parameter or query parameter depending on your route definition
     const url = "{{ route('postuler', ':offreId') }}".replace(':offreId', offreId);
-    
+
     $.ajax({
         url: url,
         method: "POST",
@@ -84,9 +83,7 @@ function postuler(offreId) {
         }
     });
 }
-
         </script>
-    
     </x-app-layout>
-    
+
 
