@@ -55,4 +55,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Entreprise::class);
     }
+    // Dans le modèle User.php
+    public function offres()
+    {
+        return $this->belongsToMany(Offre::class);
+    }
 }

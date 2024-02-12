@@ -36,6 +36,10 @@ class Companycontroller extends Controller
         $entreprise->description = $validatedData['description'];
         $entreprise->save();
 
+        $user = Auth::user();
+        $user->role = 'entreprise';
+        $user->save();
+
         // Redirect back or do something else
         return redirect()->back()->with('success', 'Company created successfully!');
     }

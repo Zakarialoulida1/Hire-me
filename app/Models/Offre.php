@@ -22,4 +22,11 @@ class Offre extends Model
     {
         return $this->belongsTo(Entreprise::class);
     }
+
+    // Dans le modèle Offre.php
+public function users()
+{
+    return $this->belongsToMany(User::class);
+}
+
 }

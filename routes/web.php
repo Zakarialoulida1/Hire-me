@@ -35,10 +35,19 @@ Route::middleware('auth')->group(function () {
   
   
   Route::post('/company/store', [\App\Http\Controllers\Companycontroller::class, 'store'])->name('store.company');
+  Route::get('/company', [\App\Http\Controllers\Companycontroller::class, 'index'])->name('formcompany');
  
-    Route::get('/company', [\App\Http\Controllers\Companycontroller::class, 'index'])->name('formcompany');
- 
- 
+
+
+  Route::post('/offre/store', [\App\Http\Controllers\Offrecontroller::class,'store'])->name('store.offre');
+  Route::get('/offre', [\App\Http\Controllers\Offrecontroller::class, 'index'])->name('formoffre');
+  Route::get('/offres', [\App\Http\Controllers\Offrecontroller::class, 'show'])->name('offres');
+
+
+
+  Route::post('postuler/{offreId}', [\App\Http\Controllers\Offrecontroller::class, 'postuler'])->name('postuler');
+
+  
     Route::get('/cvform', [\App\Http\Controllers\Formcontroller::class, 'index'])->name('formCv');
     Route::post('/store', [\App\Http\Controllers\Formcontroller::class, 'store'])->name('cv.store');
     Route::get('/cv/cursus', [\App\Http\Controllers\Formcontroller::class, 'getUserCursus'])->name('getUserCursus');
