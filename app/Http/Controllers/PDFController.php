@@ -20,7 +20,6 @@ class PDFController extends Controller
         $experiences = $cv->experiences;
         $competences = $cv->competences;
 
-        // Pass the data to a view for displaying
         return view('cv.cv', compact('user',  'cursuses', 'languages', 'experiences', 'competences'));
     
 
@@ -45,13 +44,9 @@ class PDFController extends Controller
         $data = compact('user', 'cursuses', 'languages', 'experiences', 'competences');
     
     
-    
-        // Extract only the content of the container div
-     
-        // Generate the PDF
+
         $pdf = PDF::loadView('cv.cv', $data);
     
-        // Download the PDF
         return $pdf->download('sample.pdf');
     }
 }

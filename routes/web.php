@@ -36,7 +36,7 @@ Route::middleware('auth')->group(function () {
   
   Route::post('/company/store', [\App\Http\Controllers\Companycontroller::class, 'store'])->name('store.company');
   Route::get('/company', [\App\Http\Controllers\Companycontroller::class, 'index'])->name('formcompany');
- 
+  Route::get('/company/show', [\App\Http\Controllers\Companycontroller::class, 'show'])->name('show.company');
 
 
   Route::post('/offre/store', [\App\Http\Controllers\Offrecontroller::class,'store'])->name('store.offre');

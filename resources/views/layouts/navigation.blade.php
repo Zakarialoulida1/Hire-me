@@ -103,11 +103,11 @@ Heroicon name: outline/x"
                 </div>
                 <nav class="hidden lg:py-2 lg:flex lg:space-x-8" aria-label="Global">
 
-                    <a href="{{ route('dashboard') }}"
+                    <a href="{{ route('show.company') }}"
                         class="bg-gray-900 text-white rounded-md py-2 px-3 inline-flex items-center text-sm font-medium"
                         aria-current="page" x-state:on="Current" x-state:off="Default"
                         x-state-description="Current: &quot;bg-gray-900 text-white&quot;, Default: &quot;text-gray-300 hover:bg-gray-700 hover:text-white&quot;">
-                        Dashboard
+                       Entreprise
                     </a>
                     <a href="{{ route('offres') }}"
                         class="bg-gray-900 text-white rounded-md py-2 px-3 inline-flex items-center text-sm font-medium"
@@ -129,12 +129,14 @@ Heroicon name: outline/x"
                         Post an offre
                     </a>
                     @endif
+                    @if (!(Auth()->user()->role === 'entreprise'))
                     <a href="{{ route('formcompany') }}"
                         class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md py-2 px-3 inline-flex items-center text-sm font-medium"
                         x-state-description="undefined: &quot;bg-gray-900 text-white&quot;, undefined: &quot;text-gray-300 hover:bg-gray-700 hover:text-white&quot;">
                         For Company
                     </a>
-
+                    @endif
+    
                 </nav>
             </div>
 
@@ -142,10 +144,10 @@ Heroicon name: outline/x"
                 id="mobile-menu" x-show="open">
                 <div class="pt-2 pb-3 px-2 space-y-1">
 
-                    <a href="{{ route('dashboard') }}"
+                    <a href="{{ route('show.company') }}"
                         class="bg-gray-900 text-white block rounded-md py-2 px-3 text-base font-medium"
                         aria-current="page" x-state:on="Current" x-state:off="Default"
-                        x-state-description="Current: &quot;bg-gray-900 text-white&quot;, Default: &quot;text-gray-300 hover:bg-gray-700 hover:text-white&quot;">Dashboard</a>
+                        x-state-description="Current: &quot;bg-gray-900 text-white&quot;, Default: &quot;text-gray-300 hover:bg-gray-700 hover:text-white&quot;">Entreprise</a>
                     <a href="" class="bg-gray-900 text-white block rounded-md py-2 px-3 text-base font-medium"
                         aria-current="page" x-state:on="Current" x-state:off="Default"
                         x-state-description="Current: &quot;bg-gray-900 text-white&quot;, Default: &quot;text-gray-300 hover:bg-gray-700 hover:text-white&quot;">Your
@@ -159,11 +161,12 @@ Heroicon name: outline/x"
                         class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md py-2 px-3 text-base font-medium"
                         x-state-description="undefined: &quot;bg-gray-900 text-white&quot;, undefined: &quot;text-gray-300 hover:bg-gray-700 hover:text-white&quot;">Post
                         an offre</a>
-
+                        @if (!(Auth()->user()->role === 'entreprise'))
                     <a href="{{ route('formcompany') }}"
                         class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md py-2 px-3 text-base font-medium"
                         x-state-description="undefined: &quot;bg-gray-900 text-white&quot;, undefined: &quot;text-gray-300 hover:bg-gray-700 hover:text-white&quot;">For
                         Company</a>
+                        @endif
 
                 </div>
                 <div class="border-t border-gray-700 pt-4 pb-3">

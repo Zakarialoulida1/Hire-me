@@ -24,7 +24,7 @@ class Companycontroller extends Controller
         ]);
 
         // Handle file upload for logo
-        $logoPath = $request->file('logo')->store('uploads','public');
+        $logoPath = $request->file('logo')->store('images','public');
 
         // Create a new entreprise instance
         $entreprise = new Entreprise();
@@ -42,5 +42,9 @@ class Companycontroller extends Controller
 
         // Redirect back or do something else
         return redirect()->back()->with('success', 'Company created successfully!');
+    }
+    public function show (){
+        $entreprises=Entreprise::all();
+        return view('company.index',compact('entreprises'));
     }
 }
