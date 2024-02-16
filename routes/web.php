@@ -48,6 +48,8 @@ Route::middleware('auth')->group(function () {
   Route::get('/offre', [\App\Http\Controllers\Offrecontroller::class, 'index'])->name('formoffre');
   Route::get('/offres', [\App\Http\Controllers\Offrecontroller::class, 'show'])->name('offres');
   Route::get('/offers/search', [\App\Http\Controllers\Offrecontroller::class, 'search'])->name('offers.search');
+  Route::get('/Postulants/{id}', [\App\Http\Controllers\Offrecontroller::class, 'Postulants'])->name('Postulants');
+  
   Route::delete('/offers/{id}', [\App\Http\Controllers\Offrecontroller::class, 'delete'])->name('offers.delete');
 Route::get('/statistique' ,[ProfileController::class, 'statistique'])->name('statistique');
 

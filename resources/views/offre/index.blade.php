@@ -27,8 +27,12 @@
                     <hr class="mb-12">
                     <div class="m-4 absolute bottom-0 right-0">
                         <div class="flex gap-4">
+                            @if (!(auth()->user()->role==='Admin'))
+                                
+                            
                             <button class="border rounded bg-green-400 p-2 postuler-btn"
                                 data-offre-id="{{ $offre->id }}">Postuler</button>
+                                @endif
                             <form action="{{ route('offers.delete', $offre->id) }}" method="post">
                                 @method('DELETE')
                                 @csrf
@@ -37,7 +41,7 @@
                             </form>
                         </div>
                     </div>
-                    <a id="readmore" class="underline" role="button">Read more</a>
+                    <a href="{{route('Postulants',$offre->id)}}" id="readmore" class="underline" role="button">Postulation members</a>
                 </div>
             @endforeach
 

@@ -146,7 +146,7 @@
                     </a>
                 @endif
                 @if ((Auth()->user()->role === 'Admin'))
-                <a href="{{ route('formcompany') }}"
+                <a href="{{ route('statistique') }}"
                     class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md py-2 px-3 inline-flex items-center text-sm font-medium"
                     x-state-description="undefined: &quot;bg-gray-900 text-white&quot;, undefined: &quot;text-gray-300 hover:bg-gray-700 hover:text-white&quot;">
                     Statistique
