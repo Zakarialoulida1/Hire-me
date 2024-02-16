@@ -104,4 +104,10 @@ public function delete($offreId){
     $offre->delete();
     return redirect()->back()->with('Success','');
 }
+public function Postulants($offreId){
+    $offre = Offre::with('users')->find($offreId);
+    
+    return view('offre.postulants', compact('offre'));
+}
+
 }
