@@ -39,28 +39,69 @@ class Offrecontroller extends Controller
     }
 
 
-    public function show() {
-        $userRole = Auth::user()->role;
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        
+        // Perform the search
+        $offers = Offre::where('titre', 'like', '%'.$query.'%')
+                       ->orWhere('description', 'like', '%'.$query.'%')
+                       ->get();
 
-        if ($userRole === 'entreprise') {
-            $offres = Auth::user()->entreprise->offres;
-        } else {
-            $offres = Offre::all();
-        }
-
-        return view('offre.index', compact('offres'));
+        // Return search results as JSON
+        return response()->json($offers);
     }
+
+    
+
+    
+    public function show()
+{
+    $user = Auth::user();
+    $userRole = $user->role;
+
+    if ($userRole === 'entreprise') {
+        $offresNotPostulated =  $user->entreprise->offres;
+        $offresPostulated = Offre::whereHas('users', function ($query) use ($user) {
+            $query->where('user_id', $user->id);
+        })->get();
+       
+        return view('offre.index', compact('offresNotPostulated', 'offresPostulated'));
+    } else {
+        // Get offers where the user has not postulated yet
+        $offresNotPostulated = Offre::whereDoesntHave('users', function ($query) use ($user) {
+            $query->where('user_id', $user->id);
+        })->get();
+
+        // Get offers where the user has already postulated
+        $offresPostulated = Offre::whereHas('users', function ($query) use ($user) {
+            $query->where('user_id', $user->id);
+        })->get();
+
+        return view('offre.index', compact('offresNotPostulated', 'offresPostulated'));
+    }
+}
+
 
 public function postuler(Request $request, $offreId)
 {
+
     // Find the offer by its ID
     $offre = Offre::findOrFail($offreId);
+
 
     // Associate the authenticated user with the offer
     $user = auth()->user();
     $user->offres()->attach($offreId);
 
+
     // Respond with a success message
     return response()->json(['message' => 'Postulation réussie']);
+}
+
+public function delete($offreId){
+    $offre=Offre::findorFail($offreId);
+    $offre->delete();
+    return redirect()->back()->with('Success','');
 }
 }

@@ -12,6 +12,8 @@ class Companycontroller extends Controller
     public function index(){
         return view('company.form');
     }
+
+
     public function store(Request $request)
     {
         // Validate the incoming request data
@@ -43,8 +45,21 @@ class Companycontroller extends Controller
         // Redirect back or do something else
         return redirect()->back()->with('success', 'Company created successfully!');
     }
+
     public function show (){
         $entreprises=Entreprise::all();
         return view('company.index',compact('entreprises'));
     }
+
+    public function searchCompanies(Request $request)
+    {
+        $query = $request->input('query');
+
+        // Perform the search query
+        $companies = Entreprise::where('nom', 'like', '%' . $query . '%')->with('user')->get();
+
+        return response()->json($companies);
+    }
+
+    
 }

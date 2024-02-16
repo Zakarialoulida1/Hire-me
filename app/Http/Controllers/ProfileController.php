@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Entreprise;
+use App\Models\Offre;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -35,6 +38,8 @@ class ProfileController extends Controller
     //     $request->user()->save();
     //     return Redirect::route('profile.edit')->with('status', 'profile-updated');
     // }
+   
+
 public function update(Request $request)
     {
         // Validate the incoming request data
@@ -42,7 +47,15 @@ public function update(Request $request)
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Assuming image is an optional field
+            'industrie' => 'required|string|max:255',
+            'adresse' => 'required|string|max:255',
+            'About' => 'required|string|max:255',
+            'JobTitle' => 'required|string|max:255',
+            'phone' => 'required|string|max:255',
+            'Posteactuel' => 'required|string|max:255',
         ]);
+
+     
 
         // Get the authenticated user
         $user = Auth::user();
@@ -50,6 +63,7 @@ public function update(Request $request)
         // Update name and email
         $user->name = $validatedData['name'];
         $user->email = $validatedData['email'];
+
 
         // Check if an image is provided
         if ($request->hasFile('image')) {
@@ -62,12 +76,13 @@ public function update(Request $request)
             }
 
             // Update user's image column
-            $user->image = $imagePath;
+         
         }
 
         // Save the updated user record
-        $user->save();
-
+        auth()->user()->update($request->all());
+   $user->image = $imagePath;
+   $user->save();
         // Redirect back with success message
         return redirect()->back()->with('success', 'Profile updated successfully!');
     }
@@ -90,5 +105,11 @@ public function update(Request $request)
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+    public function statistique(){
+        $companies=Entreprise::count();
+        $offres=Offre::count();
+        $users = User::where('role', 'user')->count();
+        return view('statistique',compact('companies','offres','users'));
     }
 }
